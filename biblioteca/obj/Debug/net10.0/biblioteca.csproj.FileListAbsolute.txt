@@ -1,0 +1,15 @@
+C:\Rodrigo\sistema-biblioteca\biblioteca\bin\Debug\net10.0\biblioteca.exe
+C:\Rodrigo\sistema-biblioteca\biblioteca\bin\Debug\net10.0\biblioteca.deps.json
+C:\Rodrigo\sistema-biblioteca\biblioteca\bin\Debug\net10.0\biblioteca.runtimeconfig.json
+C:\Rodrigo\sistema-biblioteca\biblioteca\bin\Debug\net10.0\biblioteca.dll
+C:\Rodrigo\sistema-biblioteca\biblioteca\bin\Debug\net10.0\biblioteca.pdb
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\biblioteca.GeneratedMSBuildEditorConfig.editorconfig
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\biblioteca.AssemblyInfoInputs.cache
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\biblioteca.AssemblyInfo.cs
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\biblioteca.csproj.CoreCompileInputs.cache
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\biblioteca.sourcelink.json
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\biblioteca.dll
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\refint\biblioteca.dll
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\biblioteca.pdb
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\biblioteca.genruntimeconfig.cache
+C:\Rodrigo\sistema-biblioteca\biblioteca\obj\Debug\net10.0\ref\biblioteca.dll

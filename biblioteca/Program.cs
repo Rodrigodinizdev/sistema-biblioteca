@@ -1,134 +1,158 @@
 ﻿using biblioteca.Service;
 using biblioteca.Models;
+using biblioteca.Enums;
 
+EmprestimoService Emprestimoservice = new EmprestimoService();
+LivroService livroService = new LivroService();
+UsuarioService usuarioService = new UsuarioService();
 
-// List<Usuario> usuarios = new List<Usuario>();
-// List<Livro> livros = new List<Livro>();
-// EmprestimoService emprestimo = new EmprestimoService();
+while (true)
+{
+    Console.Clear();
+    Console.WriteLine("=== SISTEMA DE BIBLIOTECA ===");
+    Console.WriteLine("1 - Cadastrar Livro");
+    Console.WriteLine("2 - Cadastrar Usuário");
+    Console.WriteLine("3 - Realizar Empréstimo");
+    Console.WriteLine("4 - Devolver Livro");
+    Console.WriteLine("5 - Listar Livros");
+    Console.WriteLine("6 - Listar Usuários");
+    Console.WriteLine("0 - Sair");
 
-//  Usuario usuario1 = new Usuario("Rodrigo", "rodrigo@example.com", "123456789");
-// usuarios.Add(usuario1);
+    Console.Write("\nEscolha: ");
+    string opcao = Console.ReadLine();
 
-// Livro livro1 = new Livro ("abcde", "pessoa", 2006);
-// livros.Add(livro1);
+    Console.Clear();
 
-// System.Console.WriteLine($"{livro1.Autor}, {usuario1}");
+    switch (opcao)
+    {
+        case "1":
+            CadastrarLivro(livroService);
+            break;
 
-// emprestimo.RealizarEmprestimo(usuario1, livro1);
+        case "2":
+            CadastrarUsuario(usuarioService);
+            break;
 
-// emprestimo.DevolverLivro(usuario1.Emprestimos[0], 2);
- EmprestimoService service = new EmprestimoService();
- while (true)
-        {
-            Console.Clear();
-            Console.WriteLine("=== SISTEMA DE BIBLIOTECA ===");
-            Console.WriteLine("1 - Cadastrar Livro");
-            Console.WriteLine("2 - Cadastrar Usuário");
-            Console.WriteLine("3 - Realizar Empréstimo");
-            Console.WriteLine("4 - Devolver Livro");
-            Console.WriteLine("5 - Listar Livros");
-            Console.WriteLine("6 - Listar Usuários");
-            Console.WriteLine("0 - Sair");
+        case "3":
+            RealizarEmprestimo(Emprestimoservice, livroService, usuarioService);
+            break;
 
-            Console.Write("\nEscolha: ");
-            string opcao = Console.ReadLine();
+        case "4":
+            DevolverLivro(Emprestimoservice, usuarioService, livroService);
+            break;
 
-            Console.Clear();
+        case "5":
+            ListarLivros(livroService);
+            break;
 
-            switch (opcao)
-            {
-                case "1":
-                    CadastrarLivro(service);
-                    break;
+        case "6":
+            ListarUsuarios(usuarioService);
+            break;
 
-                case "2":
-                    CadastrarUsuario(service);
-                    break;
+        case "0":
+            Console.WriteLine("Saindo...");
+            return;
 
-                case "3":
-                    RealizarEmprestimo(service);
-                    break;
+        default:
+            Console.WriteLine("Opção inválida!");
+            break;
+    }
 
-                case "4":
-                    DevolverLivro(service);
-                    break;
+    Console.WriteLine("\nPressione qualquer tecla...");
+    Console.ReadKey();
+}
 
-                case "5":
-                    ListarLivros(service);
-                    break;
-
-                case "6":
-                    ListarUsuarios(service);
-                    break;
-
-                case "0":
-                    Console.WriteLine("Saindo...");
-                    return;
-
-                default:
-                    Console.WriteLine("Opção inválida!");
-                    break;
-            }
-
-            Console.WriteLine("\nPressione qualquer tecla...");
-            Console.ReadKey();
-        }
-
-static void CadastrarLivro(EmprestimoService service)
+static void CadastrarLivro(LivroService service)
 {
     Console.Write("Título: ");
     string titulo = Console.ReadLine();
+    while (string.IsNullOrWhiteSpace(titulo))
+    {
+        Console.WriteLine("ERRO! O título do livro não pode ser vazio. Tente novamente.");
+        Console.Write("Título: ");
+        titulo = Console.ReadLine();
+    }
 
     Console.Write("Autor: ");
     string autor = Console.ReadLine();
+    while (string.IsNullOrWhiteSpace(autor))
+    {
+        Console.WriteLine("ERRO! O autor do livro não pode ser vazio. Tente novamente.");
+        Console.Write("Autor: ");
+        autor = Console.ReadLine();
+    }
 
     Console.Write("Ano: ");
-    int ano = int.Parse(Console.ReadLine());
+    string anoInput = Console.ReadLine();
+    while (!int.TryParse(anoInput, out int ano) || ano <= 0 || DateTime.Now.Year < ano)
+    {
+        Console.WriteLine("ERRO! O ano de publicação deve ser um número inteiro positivo e menor ou igual ao ano atual. Tente novamente.");
+        Console.Write("Ano: ");
+        anoInput = Console.ReadLine();
+    }
 
-    service.Livros.Add(new Livro(titulo, autor, ano));
-
+    service.CadastrarLivro(titulo, autor, int.Parse(anoInput));
     Console.WriteLine("Livro cadastrado!");
 }
 
-static void CadastrarUsuario(EmprestimoService service)
+static void CadastrarUsuario(UsuarioService service)
 {
     Console.Write("Nome: ");
     string nome = Console.ReadLine();
+    while (string.IsNullOrWhiteSpace(nome))
+    {
+        Console.WriteLine("ERRO! O nome do usuário não pode ser vazio. Tente novamente.");
+        Console.Write("Nome: ");
+        nome = Console.ReadLine();
+    }
 
     Console.Write("Email: ");
     string email = Console.ReadLine();
+    while (string.IsNullOrWhiteSpace(email))
+    {
+        Console.WriteLine("ERRO! O email do usuário não pode ser vazio. Tente novamente.");
+        Console.Write("Email: ");
+        email = Console.ReadLine();
+    }
 
     Console.Write("Telefone: ");
     string telefone = Console.ReadLine();
+    while (string.IsNullOrWhiteSpace(telefone) || telefone.Length != 11)
+    {
+        Console.WriteLine("ERRO! O telefone do usuário não pode ser vazio e deve ter 11 caracteres. Tente novamente.");
+        Console.Write("Telefone: ");
+        telefone = Console.ReadLine();
+    }
 
-    service.Usuarios.Add(new Usuario(nome, email, telefone));
+    service.CadastrarUsuario(nome, email, telefone);
 
     Console.WriteLine("Usuário cadastrado!");
 }
-static void RealizarEmprestimo(EmprestimoService service)
+
+static void RealizarEmprestimo(EmprestimoService service, LivroService livroService, UsuarioService usuarioService)
 {
-    if (service.Usuarios.Count == 0 || service.Livros.Count == 0)
+    if (usuarioService.usuarios.Count == 0 || livroService.livros.Count == 0)
     {
         Console.WriteLine("Cadastre pelo menos um usuário e um livro.");
         return;
     }
 
     Console.WriteLine("Usuários:");
-    foreach (var u in service.Usuarios)
-        Console.WriteLine(u);
+    foreach (var usuarios in usuarioService.usuarios)
+        Console.WriteLine(usuarios);
 
     Console.Write("\nID do usuário: ");
     int idUser = int.Parse(Console.ReadLine());
 
     Console.WriteLine("\nLivros:");
-    foreach (var l in service.Livros)
-        Console.WriteLine($"[{l.Id}] {l.Titulo} - {(l.Disponivel ? "Disponível" : "Emprestado")}");
+    foreach (var livros in livroService.livros)
+        Console.WriteLine($"[{livros.Id}] {livros.Titulo} - {(livros.StatusLivro == StatusLivroEnum.Disponível ? "Disponível" : "Emprestado")}");
 
     Console.Write("\nID do livro: ");
     int idLivro = int.Parse(Console.ReadLine());
 
-    var usuario = service.Usuarios.FirstOrDefault(u => u.Id == idUser);
-    var livro = service.Livros.FirstOrDefault(l => l.Id == idLivro);
+    var usuario = usuarioService.usuarios.FirstOrDefault(u => u.Id == idUser);
+    var livro = livroService.livros.FirstOrDefault(l => l.Id == idLivro);
 
     if (usuario == null || livro == null)
     {
@@ -138,12 +162,13 @@ static void RealizarEmprestimo(EmprestimoService service)
 
     service.RealizarEmprestimo(usuario, livro);
 }
-static void DevolverLivro(EmprestimoService service)
+
+static void DevolverLivro(EmprestimoService service, UsuarioService usuarioService, LivroService livroService)
 {
     Console.Write("ID do usuário: ");
     int idUser = int.Parse(Console.ReadLine());
 
-    var usuario = service.Usuarios.FirstOrDefault(u => u.Id == idUser);
+    var usuario = usuarioService.usuarios.FirstOrDefault(u => u.Id == idUser);
 
     if (usuario == null)
     {
@@ -181,16 +206,17 @@ static void DevolverLivro(EmprestimoService service)
 
     service.DevolverLivro(emprestimo, dias);
 }
-static void ListarLivros(EmprestimoService service)
+
+static void ListarLivros(LivroService service)
 {
-    foreach (var l in service.Livros)
+    foreach (var l in service.livros)
     {
-        Console.WriteLine($"[{l.Id}] {l.Titulo} - {(l.Disponivel ? "Disponível" : "Emprestado")}");
+        Console.WriteLine($"[{l.Id}] {l.Titulo} - {(l.StatusLivro == StatusLivroEnum.Disponível ? "Disponível" : "Emprestado")}");
     }
 }
-static void ListarUsuarios(EmprestimoService service)
+static void ListarUsuarios(UsuarioService service)
 {
-    foreach (var u in service.Usuarios)
+    foreach (var u in service.usuarios)
     {
         Console.WriteLine(u);
     }

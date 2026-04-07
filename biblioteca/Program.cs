@@ -141,17 +141,29 @@ static void RealizarEmprestimo(EmprestimoService service, LivroService livroServ
     foreach (var usuarios in usuarioService.usuarios)
         Console.WriteLine(usuarios);
 
+    int idUsuario;
+
     Console.Write("\nID do usuário: ");
-    int idUser = int.Parse(Console.ReadLine());
+    while (!int.TryParse(Console.ReadLine(), out idUsuario))
+    {
+        Console.WriteLine("ID inválido.");
+        Console.Write("\nID do usuário: ");
+    }
 
     Console.WriteLine("\nLivros:");
     foreach (var livros in livroService.livros)
         Console.WriteLine($"[{livros.Id}] {livros.Titulo} - {(livros.StatusLivro == StatusLivroEnum.Disponível ? "Disponível" : "Emprestado")}");
 
-    Console.Write("\nID do livro: ");
-    int idLivro = int.Parse(Console.ReadLine());
+    int idLivro;
 
-    var usuario = usuarioService.usuarios.FirstOrDefault(u => u.Id == idUser);
+    Console.Write("\nID do livro: ");
+    while (!int.TryParse(Console.ReadLine(), out idLivro))
+    {
+        Console.WriteLine("ID inválido.");
+        Console.Write("\nID do livro: ");
+    }
+
+    var usuario = usuarioService.usuarios.FirstOrDefault(u => u.Id == idUsuario);
     var livro = livroService.livros.FirstOrDefault(l => l.Id == idLivro);
 
     if (usuario == null || livro == null)

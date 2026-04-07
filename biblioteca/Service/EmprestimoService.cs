@@ -5,7 +5,7 @@ public class EmprestimoService
 {
     public void RealizarEmprestimo(Usuario usuario, Livro livro)
     {
-        if (livro.StatusLivro == StatusLivroEnum.Indisponível)
+        if (livro.StatusLivro == StatusLivroEnum.Emprestado)
         {
             Console.WriteLine("Livro não está disponível");
             return;
@@ -20,7 +20,7 @@ public class EmprestimoService
         Emprestimo emprestimo = new Emprestimo(livro, usuario);
 
         usuario.Emprestimos.Add(emprestimo);
-        livro.StatusLivro = StatusLivroEnum.Indisponível;
+        livro.StatusLivro = StatusLivroEnum.Emprestado;
         Console.WriteLine($"Empréstimo realizado: {emprestimo}");
     }
 

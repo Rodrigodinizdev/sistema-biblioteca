@@ -36,7 +36,7 @@ using biblioteca.Models;
                 return;
             }
 
-            if (livro.StatusLivro == StatusLivroEnum.Indisponível)
+            if (livro.StatusLivro == StatusLivroEnum.Emprestado)
             {
                 Console.WriteLine("Não é possível remover um livro que está emprestado.");
                 return;

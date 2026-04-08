@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Rodrigo\\sistema-biblioteca\\biblioteca\\biblioteca.csproj": {}
+    "C:\\Dev\\sistema-biblioteca\\biblioteca\\biblioteca.csproj": {}
   },
   "projects": {
-    "C:\\Rodrigo\\sistema-biblioteca\\biblioteca\\biblioteca.csproj": {
+    "C:\\Dev\\sistema-biblioteca\\biblioteca\\biblioteca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Rodrigo\\sistema-biblioteca\\biblioteca\\biblioteca.csproj",
+        "projectUniqueName": "C:\\Dev\\sistema-biblioteca\\biblioteca\\biblioteca.csproj",
         "projectName": "biblioteca",
-        "projectPath": "C:\\Rodrigo\\sistema-biblioteca\\biblioteca\\biblioteca.csproj",
-        "packagesPath": "C:\\Users\\Rodrigo\\.nuget\\packages\\",
-        "outputPath": "C:\\Rodrigo\\sistema-biblioteca\\biblioteca\\obj\\",
+        "projectPath": "C:\\Dev\\sistema-biblioteca\\biblioteca\\biblioteca.csproj",
+        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\sistema-biblioteca\\biblioteca\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Rodrigo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.104/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

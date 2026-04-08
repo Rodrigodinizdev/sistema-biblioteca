@@ -1,3 +1,4 @@
+using biblioteca.Enums;
 namespace biblioteca.Models;
 
 public class Livro
@@ -8,23 +9,17 @@ public class Livro
         Autor = autor;
         AnoPublicacao = anoPublicacao;
         Id = ++ContadorId;
-        Disponivel = true;   
+        StatusLivro = StatusLivroEnum.Disponível;   
     }
-    public static int ContadorId = 0;
+    private static int ContadorId = 0;
     public int Id { get; private set; }
     public string Titulo { get; private set; }
     public string Autor { get; private set; }
     public int AnoPublicacao { get; private set; }
-    public bool Disponivel { get; set; }
+    public StatusLivroEnum StatusLivro { get; set; }
 
-    public void ExcluirLivro(Emprestimo emprestimo)
+    public override string ToString()
     {
-        if(emprestimo.Devolvido)
-        {
-            System.Console.WriteLine("Livro não pode ser excluído, pois está emprestado.");
-            return;
-        }
-
-            System.Console.WriteLine($"Livro \"{Titulo}\" excluído com sucesso."); 
+        return $"Id: {Id} | Título: {Titulo} | Autor: {Autor} | Ano: {AnoPublicacao} | Status: {(StatusLivro == StatusLivroEnum.Disponível ? "Disponível" : "Emprestado")}";
     }
 }

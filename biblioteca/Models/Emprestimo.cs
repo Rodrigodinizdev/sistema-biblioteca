@@ -19,7 +19,6 @@ public class Emprestimo
     public Usuario Usuario { get; private set; }
     public DateTime DataEmprestimo { get; private set; }
     public DateTime? DataDevolucao { get; set; }
-    
     public bool Devolvido { get;  set; }
     public decimal MultaGerada { get; private set; }
     public decimal CalcularMulta(int diasComLivro)
@@ -28,13 +27,12 @@ public class Emprestimo
         if (diasAtraso <= 0) return 0;
         MultaGerada = diasAtraso * MultaPorDia;
         return MultaGerada;
-
     }
     public override string ToString()
     {
         string status = Devolvido? $"Devolvido em {DataDevolucao:dd/MM/yyyy}" : "Em aberto";
         string multa = MultaGerada > 0? $" | Multa: {MultaGerada:C}": "";
-        return $"[{Id}] Livro: \"{Livro.Titulo}\" | Usuário: {Usuario.Nome} | Empréstimo: {DataEmprestimo:dd/MM/yyyy} | {status}{multa}";
+        return $"[{Id}] Livro: {Livro.Titulo} | Usuário: {Usuario.Nome} | Empréstimo: {DataEmprestimo:dd/MM/yyyy} | {status}{multa}";
     }
 }
 

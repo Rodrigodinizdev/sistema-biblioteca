@@ -1,4 +1,5 @@
 namespace biblioteca.Service;
+
 using biblioteca.Enums;
 using biblioteca.Models;
 public class EmprestimoService
@@ -26,15 +27,16 @@ public class EmprestimoService
 
     public void DevolverLivro(Emprestimo emprestimo, int diasComLivro)
     {
+       
         if (diasComLivro > 7)
         {
             emprestimo.CalcularMulta(diasComLivro);
-            System.Console.WriteLine($"Multa de {emprestimo.MultaGerada:C} gerada por atraso de {diasComLivro - 7} dias.");
+            Console.WriteLine($"Multa de {emprestimo.MultaGerada:C} gerada por atraso de {diasComLivro - 7} dias.");
         }
         emprestimo.Devolvido = true;
         emprestimo.DataDevolucao = DateTime.Now;
         emprestimo.Livro.StatusLivro = StatusLivroEnum.Disponível;
-        System.Console.WriteLine($"Livro \"{emprestimo.Livro.Titulo}\" devolvido por {emprestimo.Usuario.Nome} em {emprestimo.DataDevolucao:dd/MM/yyyy}.");
+        Console.WriteLine($"Livro \"{emprestimo.Livro.Titulo}\" devolvido por {emprestimo.Usuario.Nome} em {emprestimo.DataDevolucao:dd/MM/yyyy}.");
 
     }
 }

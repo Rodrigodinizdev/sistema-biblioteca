@@ -20,6 +20,6 @@ public class Livro
 
     public override string ToString()
     {
-        return $"Id: {Id} | Título: {Titulo} | Autor: {Autor} | Ano: {AnoPublicacao} | Status: {StatusLivro}";
+        return $"Id: {Id} | Título: {Titulo} | Autor: {Autor} | Ano: {AnoPublicacao} | Status: {(StatusLivro == StatusLivroEnum.Disponível ? "Disponível" : "Emprestado")}";
     }
 }

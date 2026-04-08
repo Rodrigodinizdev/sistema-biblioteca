@@ -10,7 +10,7 @@ using biblioteca.Models;
         {
             Livro livro = new Livro(titulo, autor, anoPublicacao);
             livros.Add(livro);
-            Console.WriteLine($"Livro cadastrado: {livro}");
+            Console.WriteLine($"Livro cadastrado!: {livro}");
         }
 
         public void ListarLivros()

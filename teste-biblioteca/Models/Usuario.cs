@@ -11,9 +11,9 @@ public class Usuario
     }
     private static int _contadorId = 0;
     public int Id { get; }
-    public string Nome { get; private set; }
-    public string Telefone { get; private set; }
-    public string Email { get; private set; }
+    public string Nome { get; }
+    public string Telefone { get; }
+    public string Email { get; }
 
     public override string ToString()
     {

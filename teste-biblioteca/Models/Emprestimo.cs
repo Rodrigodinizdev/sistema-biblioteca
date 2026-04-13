@@ -30,10 +30,16 @@ public class Emprestimo
         return MultaGerada;
     }
 
+    public void Devolver(DateTime dataDevolucao)
+    {
+        Devolvido = true;
+        DataDevolucao = dataDevolucao;
+    }
+
     public override string ToString()
     {
-        string status = Devolvido? $"Devolvido em {DataDevolucao: dd/MM/yyyy}" : "Em aberto";
-        string Multa = MultaGerada > 0? $"| Multa: {MultaGerada:C}" : "" ;
+        string status = Devolvido ? $"Devolvido em {DataDevolucao: dd/MM/yyyy}" : "Em aberto";
+        string Multa = MultaGerada > 0 ? $"| Multa: {MultaGerada:C}" : "";
 
         return $"Id: [{Id}] | Livro: {Livro.Nome} | Usuário: {Usuario.Nome} | Empréstimo: {DataEmprestimo} | {status} {Multa}";
     }

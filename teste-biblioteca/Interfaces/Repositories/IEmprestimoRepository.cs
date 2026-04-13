@@ -6,5 +6,6 @@ public interface IEmprestimoRepository
 {
     void AdicionarEmprestimo(Emprestimo emprestimo);
     List<Emprestimo> ListarEmprestimos();
-    void BuscarEmprestimoPorId(int id);
+    Emprestimo BuscarEmprestimoPorId(int id);
+    
 }

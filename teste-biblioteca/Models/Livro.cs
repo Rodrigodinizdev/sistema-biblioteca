@@ -14,10 +14,12 @@ public class Livro
     }
     private static int _contadorId = 0;
     public int Id { get; }
-    public string Nome { get; private set; }
-    public string Autor { get; private set; }
-    public int AnoPublicacao { get; private set; }
+    public string Nome { get; }
+    public string Autor { get; }
+    public int AnoPublicacao { get; init; }
     public StatusLivroEnum StatusLivro { get; private set; }
+
+    public void AlterarStatus(StatusLivroEnum status) => StatusLivro = status;
 
     public override string ToString()
     {

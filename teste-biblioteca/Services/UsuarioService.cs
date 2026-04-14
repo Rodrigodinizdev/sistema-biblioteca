@@ -1,54 +1,45 @@
 using teste_biblioteca.DTOs;
-using teste_biblioteca.Helpers;
+using teste_biblioteca.Notification;
 using teste_biblioteca.Interfaces.Repositories;
+using teste_biblioteca.Interfaces.Services;
 using teste_biblioteca.Models;
 
 namespace teste_biblioteca.Services;
 
-public class UsuarioService
+public class UsuarioService(IUsuarioRepository usuarioRepository, Notificacao notificacao) : IUsuarioService
 {
-    public UsuarioService(IUsuarioRepository usuarioRepository, Notification notification)
-    {
-        _usuarioRepository = usuarioRepository;
-        _notification = notification;
-    }
-    private IUsuarioRepository _usuarioRepository;
-    private readonly Notification _notification;
+    private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
+    private readonly Notificacao _notificacao = notificacao;
 
     public void CadastrarUsuario(UsuarioDTO usuarioDTO)
     {
-        if(string.IsNullOrWhiteSpace(usuarioDTO.Nome))
-            _notification.AdicionarErros("Nome é obrigatório");
-        
-        if(string.IsNullOrWhiteSpace(usuarioDTO.Telefone) || usuarioDTO.Telefone.Length != 11)
-            _notification.AdicionarErros("Telefone não pode ser vazio e deve ter 11 dígitos");
-
-        if(string.IsNullOrWhiteSpace(usuarioDTO.Email) || !usuarioDTO.Email.Contains("@"))
-            _notification.AdicionarErros("Email não pode ser vazio e deve conter @");
-
-        if (_notification.TemErros())
-        {
-            _notification.ExibirErros();
-            return;
-        }
+        _notificacao.Limpar();
 
         Usuario usuario = new Usuario(usuarioDTO.Nome, usuarioDTO.Telefone, usuarioDTO.Email);
         _usuarioRepository.CadastrarUsuario(usuario);
-        Console.WriteLine($"Usuário cadastrado com Sucesso: {usuario}");
+        _notificacao.AdicionarErro($"Usuário cadastrado com Sucesso: {usuario}");
+        _notificacao.ExibirMensagens();
     }
 
     public void ListarUsuarios()
     {
+        _notificacao.Limpar();
+
         var usuarios = _usuarioRepository.ListarUsuarios();
 
         if(usuarios.Count == 0)
         {
-            _notification.AdicionarErros("Nenhum produto cadastrado");
+            _notificacao.AdicionarErro("Nenhum Usuário cadastrado");
+            _notificacao.ExibirMensagens();
             return;
         }
 
         Console.WriteLine("=== USUÁRIOS ===");
         foreach (var usuario in usuarios)
-            Console.WriteLine(usuario);
+        {
+            _notificacao.AdicionarSucesso($"{usuario}");
+            _notificacao.ExibirMensagens();
+        }
+            
     }
 }

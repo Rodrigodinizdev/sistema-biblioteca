@@ -1,55 +1,45 @@
-using teste_biblioteca.Helpers;
+using teste_biblioteca.Notification;
 using teste_biblioteca.Interfaces.IRepositories;
 using teste_biblioteca.DTOs;
 using teste_biblioteca.Models;
 using teste_biblioteca.Repositories;
+using teste_biblioteca.Interfaces.Services;
 namespace teste_biblioteca.Services;
 
-public class LivroService
+public class LivroService(ILivroRepository livroRepository, Notificacao notificacao) : ILivroService
 {
-    public LivroService(ILivroRepository livroRepository, Notification notification)
-    {
-        _livroRepository = livroRepository;
-        _notification = notification;
-    }
-    private ILivroRepository _livroRepository;
-    private readonly Notification _notification;
+    private readonly ILivroRepository _livroRepository = livroRepository;
+    private readonly Notificacao _notificacao = notificacao;
 
     public void AdicionarLivro(LivroDto livroDto)
     {
-        if(string.IsNullOrWhiteSpace(livroDto.Nome))
-            _notification.AdicionarErros("Nome do livro não pode ser vazio");
-        
-        if(string.IsNullOrWhiteSpace(livroDto.Autor))
-            _notification.AdicionarErros("Nome do autor não pode ser vazio");
-
-        if(livroDto.AnoPublicacao <= 0 || livroDto.AnoPublicacao > DateTime.Now.Year)
-            _notification.AdicionarErros("Ano não pode ser menor que zero e não pode ser maior que o ano atual");
-
-        if (_notification.TemErros())
-        {
-            _notification.ExibirErros();
-            return;
-        }
+        _notificacao.Limpar();
 
         Livro livro = new Livro(livroDto.Nome, livroDto.Autor, livroDto.AnoPublicacao);
         _livroRepository.AdicionarLivro(livro);
-        Console.WriteLine($"{livro} adicionado com sucesso");
+        _notificacao.AdicionarSucesso($"{livro}");
+        _notificacao.ExibirMensagens();  
     }
 
     public void ListarLivros()
     {
+        _notificacao.Limpar();
+
         var livros = _livroRepository.ListarLivros();
 
-        if(livros.Count == 0)
+        if (livros.Count == 0)
         {
-            _notification.AdicionarErros("Não existem Livros Cadastrados");
-            _notification.ExibirErros();
+            _notificacao.AdicionarErro("Não existem Livros Cadastrados");
+            _notificacao.ExibirMensagens();
             return;
         }
 
         Console.WriteLine("=== Livros ===");
-        foreach ( var livro in livros)
-            Console.WriteLine(livro);
+        foreach (var livro in livros)
+        {
+            _notificacao.AdicionarSucesso($"{livro}");
+            _notificacao.ExibirMensagens();   
+        }
+
     }
 }

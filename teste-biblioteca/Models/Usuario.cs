@@ -17,6 +17,6 @@ public class Usuario
 
     public override string ToString()
     {
-        return $"Nome: {Nome} | Telefone: {Telefone} | Email: {Email}";
+        return $" Id: [{Id}] | Nome: {Nome} | Telefone: {Telefone} | Email: {Email}";
     }
 }

@@ -23,6 +23,6 @@ public class Livro
 
     public override string ToString()
     {
-        return $"Livro: {Nome} | Autor> {Autor} | Ano: {AnoPublicacao}";
+        return $" Id: [{Id}] | Livro: {Nome} | Autor: {Autor} | Ano: {AnoPublicacao} | Status: {StatusLivro}";
     }   
 }

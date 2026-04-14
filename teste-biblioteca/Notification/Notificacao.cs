@@ -27,7 +27,7 @@ public class Notificacao
             if(mensagem.Tipo == TipoNotificacaoEnum.Erro)
                 Console.WriteLine($"{mensagem.Texto}");
             else 
-            Console.WriteLine($"{mensagem.Texto}");
+                Console.WriteLine($"{mensagem.Texto}");
 
         Limpar();
     }

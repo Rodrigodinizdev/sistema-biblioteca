@@ -100,8 +100,6 @@ public class BibliotecaUI(ILivroService livroService, IUsuarioService usuarioSer
         while (!int.TryParse(Console.ReadLine(), out ano) || ano <= 0 || ano > DateTime.Now.Year)
             Console.WriteLine("Ano de publicação não pode ser negativo e nem maior que o ano atual");
             
-        
-
         _livroService.AdicionarLivro(new LivroDto(nomeLivro, nomeAutor, ano));
     }
 
